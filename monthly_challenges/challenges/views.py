@@ -17,6 +17,14 @@ monthly_challenges = {
     "december": "Walk for 20 minutes every day",
 }
 
+def index(request):
+    response_html = '<ul>'
+    for month in monthly_challenges:
+        month_path = reverse('month-challenge', args=[month])
+        response_html += f'<li><a href="{month_path}">{month.capitalize()}</a>'
+    response_html += '</ul>'
+    return HttpResponse(response_html)
+
 
 def monthly_challenge_by_number(request, month):
     if 1 <= month <= 12:
@@ -24,11 +32,14 @@ def monthly_challenge_by_number(request, month):
         redirect_path = reverse('month-challenge', args=[redirect_month]) # /challenges/january
         return HttpResponseRedirect(redirect_path)
     else:
-        return HttpResponseNotFound("HttpResponseNotFound: This is not a correct month")
+        return HttpResponseNotFound('<h1>HttpResponseNotFound: This is not a correct month</h1>')
 
 
 def monthly_challenge(request, month):
     if month in monthly_challenges:
-        return HttpResponse(month + ': ' + monthly_challenges[month])
+        challenge_text = month.capitalize() + ': ' + monthly_challenges[month]
+        response_data = f'<h1>{challenge_text}</h1>'
+        return HttpResponse(response_data)
     else:
-        return HttpResponseNotFound("HttpResponseNotFound: This is not a correct month")
+        return HttpResponseNotFound('<h1>HttpResponseNotFound: This is not a correct month</h1>')
+    

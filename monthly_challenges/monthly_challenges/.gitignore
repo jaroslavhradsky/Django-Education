@@ -1,0 +1,29 @@
+# Build artifacts
+*.pyc
+*.pyo
+__pycache__/
+
+# Virtual environments
+.venv/
+env/
+
+# Test coverage
+.coverage
+htmlcov/
+
+# Documentation
+docs/_build/
+docs/venv/
+
+# IDE-specific files
+*.idea/
+.vscode/
+
+# Local configuration
+.env
+
+# Secret files
+.secret
+
+# Logs
+*.log
