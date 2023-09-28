@@ -1,11 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 
 # Create your views here.
 
-
-def january(request):
-    return HttpResponse('Eat no meat for the entire month')
-
-def february(request):
-    return HttpResponse('Walk for 20 minutes every day')
+def monthly_challenge(request, month):
+    if month == 'january': return HttpResponse('Eat no meat for the entire month')
+    elif month == 'february': return HttpResponse('Walk for 20 minutes every day')
+    elif month == 'march': return HttpResponse('Lear Django for 20 minutes every day')
+    return HttpResponseNotFound('HttpResponseNotFound: This month is not supported!')
