@@ -3,10 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ month }} Challenge</title>
+    <title>{{ month|title }} Challenge</title>
 </head>
 <body>
-    <h1>{{ month }} Challenge</h1>
-    <h2>{{ challenge_text }}</h2>
+    <h1>{{ month|title }} Challenge</h1>
+    
+    {% if challenge_text %}
+        <h2>{{ challenge_text }}</h2>
+    {% else %}
+        <p>There is no challenge for this month yet</p>
+    {% endif %}
+
 </body>
 </html>

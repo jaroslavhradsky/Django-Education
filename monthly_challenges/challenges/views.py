@@ -15,16 +15,19 @@ monthly_challenges = {
     "september": "Walk for 20 minutes every day",
     "october": "Eat no meat for the entire month",
     "november": "Lear Django for 20 minutes every day",
-    "december": "Walk for 20 minutes every day",
+    "december": None,
 }
 
 def index(request):
-    response_html = '<ul>'
-    for month in monthly_challenges:
-        month_path = reverse('month-challenge', args=[month])
-        response_html += f'<li><a href="{month_path}">{month.capitalize()}</a>'
-    response_html += '</ul>'
-    return HttpResponse(response_html)
+    #response_html = '<ul>'
+    #for month in monthly_challenges:
+    #    month_path = reverse('month-challenge', args=[month])
+    #    response_html += f'<li><a href="{month_path}">{month.capitalize()}</a>'
+    #response_html += '</ul>'
+    #return HttpResponse(response_html)
+    return render(request,'challenges/index.html',{
+        'months' : monthly_challenges,
+    })
 
 
 def monthly_challenge_by_number(request, month):
@@ -38,12 +41,12 @@ def monthly_challenge_by_number(request, month):
 
 def monthly_challenge(request, month):
     if month in monthly_challenges:
-        challenge_text = month.capitalize() + ': ' + monthly_challenges[month]
+        challenge_text = monthly_challenges[month]
         #response_data = render_to_string('challenges/challenge.html')
         #return HttpResponse(response_data)
         return render(request, 'challenges/challenge.html',{
             'challenge_text' : challenge_text,
-            'month': month.capitalize(),
+            'month': month,
         })
     else:
         return HttpResponseNotFound('<h1>HttpResponseNotFound: This is not a correct month</h1>')
