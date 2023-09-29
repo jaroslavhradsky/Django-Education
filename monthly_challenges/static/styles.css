@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap');
+
+html {
+    font-family: 'Kanit', sans-serif;
+}
+
+a {
+    color: blue;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: red;
+  }
+
+  body {
+    margin: 0;
+    background-color: #747474;
+  }
