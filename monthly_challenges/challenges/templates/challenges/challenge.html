@@ -5,6 +5,7 @@
     {% endblock %}
 
     {% block content %}
+        {% include 'challenges/includes/navigation_bar.html' %}
         <h1>{{ month|title }} Challenge</h1>
         {% if challenge_text %}
             <h2>{{ challenge_text }}</h2>
