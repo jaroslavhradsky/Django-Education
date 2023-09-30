@@ -20,10 +20,12 @@
     </section>
 
     <section id="latest-posts">
-        <h2>Moje nedávné nápady</h2>
+        <h2>Moje nedávné příspěvky</h2>
 
         <ul>
-            {% include 'blog/includes/post.html' %}
+            {% for post in posts %}
+                {% include 'blog/includes/post.html' %}
+            {% endfor %}
         </ul>
     </section>
 
