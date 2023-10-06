@@ -8,9 +8,11 @@ def index(request):
         'books': books
     })
 
-def book_detail(request, id):
+#def book_detail(request, id):
+def book_detail(request, slug):
     try:
-        book = Book.objects.get(pk=id)
+        # book = Book.objects.get(pk=id)
+        book = Book.objects.get(slug=slug)
     except:
         raise Http404()
     #book = get_object_or_404(Book, pk=id) # another alternative how to raise 404 if book does not exist
