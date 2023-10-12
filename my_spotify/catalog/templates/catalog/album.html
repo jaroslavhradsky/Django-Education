@@ -1,4 +1,5 @@
 {% extends 'catalog/base.html' %}
+{% load static %}
 
 {% block title %}
     Album details
@@ -8,4 +9,7 @@
     {% include 'catalog/includes/navbar.html' %}
     <h1>{{ name }}</h1>
     <h2>{{ interpret }}</h2>
+    <p>
+        <img src="{% static 'catalog/images/'|add:image %}"/>
+    </p>
 {% endblock %}
