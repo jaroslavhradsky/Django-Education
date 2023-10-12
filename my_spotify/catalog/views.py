@@ -5,27 +5,34 @@ from django.http import HttpResponse
 
 music = [
     {
+        'id': 0,
         'name': 'The Wall',
         'interpret': 'Pink Floyd'
     },
     {
+        'id': 1,
         'name': 'A Night at the Opera',
         'interpret': 'Queen'
     },
     {
+        'id': 2,
         'name': 'The Division Bell',
         'interpret': 'Pink Floyd'
     },
     {
+        'id': 3,
         'name': 'Die goldene Stimme aus Prag',
         'interpret': 'Karel Gott'
     },
 ]
 
 def list(request):
-    return HttpResponse('This is a list page')
+    return render(request, 'catalog/list.html', {
+        'music': music,
+    })
 
 def album(request, id):
-    response = 'this is <strong>' + music[id]['name'] + '</strong> album by ' + music[id]['interpret']
-    print(response)
-    return HttpResponse(response)
+    return render(request, 'catalog/album.html', {
+        'name': music[id]['name'],
+        'interpret': music[id]['interpret'],
+    })

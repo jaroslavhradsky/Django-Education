@@ -1,0 +1,15 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}
+    Music list
+{% endblock %}
+
+{% block content %}
+    <h1>Music List</h1>
+    <ul>
+        {% for album in music %}
+            <li><a href="{% url 'url-album' album.id %}"> {{ album.name }}</a> by {{ album.interpret }}</li>
+        {% endfor %}
+
+    </ul>
+{% endblock %}

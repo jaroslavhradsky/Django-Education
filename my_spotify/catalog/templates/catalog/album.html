@@ -1,0 +1,11 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}
+    Album details
+{% endblock %}
+
+{% block content %}
+    {% include 'catalog/includes/navbar.html' %}
+    <h1>{{ name }}</h1>
+    <h2>{{ interpret }}</h2>
+{% endblock %}
