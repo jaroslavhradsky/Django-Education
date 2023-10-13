@@ -1,34 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from catalog.models import Album
 
 # Create your views here.
 
-music = [
-    {
-        'id': 0,
-        'name': 'The Wall',
-        'interpret': 'Pink Floyd',
-        'image': 'the-wall.jpg',
-    },
-    {
-        'id': 1,
-        'name': 'A Night at the Opera',
-        'image': 'opera.jpg',
-        'interpret': 'Queen'
-    },
-    {
-        'id': 2,
-        'name': 'The Division Bell',
-        'image': 'bell.jpg',
-        'interpret': 'Pink Floyd'
-    },
-    {
-        'id': 3,
-        'name': 'Die goldene Stimme aus Prag',
-        'interpret': 'Karel Gott',
-        'image': 'gotak.jpg',
-    },
-]
+music = Album.objects.all().order_by('interpret')
 
 def list(request):
     return render(request, 'catalog/list.html', {
@@ -36,8 +12,9 @@ def list(request):
     })
 
 def album(request, id):
+    album = Album.objects.get(pk=id)
     return render(request, 'catalog/album.html', {
-        'name': music[id]['name'],
-        'interpret': music[id]['interpret'],
-        'image': music[id]['image'],
+        'name': album.name,
+        'interpret': album.interpret,
+        'image': album.image,
     })
