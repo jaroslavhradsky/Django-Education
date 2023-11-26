@@ -34,7 +34,7 @@ def index(request):
     latest_posts = Post.objects.all().order_by('-date')[:3] # Descending order, first three
     #latest_posts = sorted(all_posts, key=get_date)[-3:]
     return render(request, 'blog/index.html',{
-        'posts': latest_posts
+        'posts': latest_posts,
     })
 
 def posts(request):
@@ -50,5 +50,6 @@ def post_detail(request, slug):
     #identified_post = Post.objects.get(slug=slug)
     identified_post = get_object_or_404(Post, slug=slug)
     return render(request, 'blog/post-detail.html', {
-        'post': identified_post
+        'post': identified_post,
+        'post_tags' : identified_post.tags.all()
     })
