@@ -1,10 +1,13 @@
 from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django.views.generic import ListView, DetailView
+from django.views import View
 
 from .models import Post
+from .forms import CommentForm
 
 from datetime import date
 
@@ -71,6 +74,41 @@ def posts(request):
     })
 '''
 
+class SinglePostView(View):
+    def get(self, request, slug):
+        post = Post.objects.get(slug=slug)
+        context = {
+            'post': post,
+            'post_tags': post.tags.all(),
+            'comment_form': CommentForm(),
+            'comments': post.comments.all().order_by('-id')
+        }
+        return render(request, 'blog/post-detail.html', context)
+
+    def post(self, request, slug):
+        comment_form = CommentForm(request.POST)
+        post = Post.objects.get(slug=slug)
+
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False) #don't save yet
+            comment.post = post
+            comment.save() # save now
+            return HttpResponseRedirect(reverse('post-detail-page', args=[slug])) #reload the current page with a redirect
+
+        # if the form is invalid
+        context = {
+            'post': post,
+            'post_tags': post.tags.all(),
+            'comment_form': comment_form
+        }
+        return render(request, 'blog/post-detail.html', context)
+
+    
+
+    
+
+
+''' BEFORE ADDING COMMENTS
 class SinglePostView(DetailView):
     template_name = 'blog/post-detail.html'
     model = Post
@@ -78,8 +116,9 @@ class SinglePostView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['post_tags'] = self.object.tags.all()
+        context['comment_form'] = CommentForm()
         return context
-
+'''
 
 ''' BEFORE CLASS VIEWS
 def post_detail(request, slug):
