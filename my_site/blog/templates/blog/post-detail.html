@@ -25,8 +25,23 @@
             {% for tag in post_tags %}
                 <span class="tag">{{ tag.caption }}</span>
             {% endfor%}
-
         </div>
+        
+        <div id="read-later">
+            <form action="{% url "read-later" %}" method="POST">
+                {% csrf_token%}
+                <input type="hidden" value="{{ post.id }}" name="post_id">
+                <button>
+                    {% if saved_for_later %}
+                        Remove from Read Later list
+                    {% else %}
+                        Read Later
+                    {% endif %}
+                </button>
+            </form>
+            
+        </div>
+
         <article>
             {% comment %} <img src="{% static 'blog/images/'|add:post.image_name %}" alt="Post Title" /> {% endcomment %}
             <img src="{{ post.image.url }}" alt="Post Title" />
