@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Newsletter -- My Store{% endblock %}
+
+{% block header %}
+    <h1>Sign up for our newsletter!</h1>
+{% endblock header %}
+
+{% block content %}
+    <p>We'd love to tell you all about our store.</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Sign up</button>
+    </form>
+{% endblock content %}

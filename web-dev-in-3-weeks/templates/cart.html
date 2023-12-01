@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h2>Your Shopping Cart</h2>
+{% endblock header %}
+
+{% block content %}
+<table class="table">
+    <thead>
+        <tr><th>Product</th><th>Quantity</th><th>Cost</th></tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr><td><a href="{{ item.product.get_absolute_url }}">{{ item.product.name }}</a></td><td>{{ item.quantity }}</td><td>${{ item.product.price }}</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

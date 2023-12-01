@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up -- My Store{% endblock %}
+
+{% block header %}
+    <h1>Register</h1>
+{% endblock header %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create your account</button>
+    </form>
+{% endblock content %}

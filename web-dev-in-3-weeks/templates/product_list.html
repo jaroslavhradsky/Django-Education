@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h2>All Products</h2>
+{% endblock header %}
+
+{% block content %}
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="col">
+    {% for product in products %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Cost: ${{ product.price }}</h6>
+                <p class="card-text">{{ product.description }}</p>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock content %}
